@@ -191,8 +191,6 @@ supervisorctl reload           //重新启动配置中的所有程序
    stdout_logfile_backups = 10
    killasgroup=true
    stopasgroup=true
-   
-   GRANT ALL PRIVILEGES ON *.* TO 'la'@'localhost';
    ```
 
 #### 六、结果展示

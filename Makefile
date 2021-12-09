@@ -8,7 +8,7 @@ GO_FILES := $(shell find go-example -name '*.go' | grep -v /vendor/ | grep -v _t
 all: build
 
 dep: ## Get the dependencies
-	@cd go-example && GOPROXY=https://goproxy.io go mod download
+	@cd go-example && env GOPROXY=https://goproxy.io go mod download
 
 lint: ## Lint Golang files
 	@cd go-example && golint -set_exit_status ${PKG_LIST}
@@ -24,7 +24,7 @@ test-coverage: ## Run tests with coverage
 	@cd go-example && cat cover.out >> coverage.txt
 
 build: dep ## Build the binary file
-	@cd go-example && GOPROXY=https://goproxy.io CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w"
+	@cd go-example && env GOPROXY=https://goproxy.io CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags "-s -w"
 	@cd c-example && gcc -s hello.c -o hello
 	@which upx && find go-example -type f -executable | xargs upx
 
